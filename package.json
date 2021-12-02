@@ -1,0 +1,21 @@
+{
+  "name": "webpackandrequest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FuriticuS/webpackandrequest.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FuriticuS/webpackandrequest/issues"
+  },
+  "homepage": "https://github.com/FuriticuS/webpackandrequest#readme",
+  "devDependencies": {
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
+  }
+}
