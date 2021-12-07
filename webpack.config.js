@@ -1,7 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const isProd = process.env.NODE_ENV === "production";
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -11,6 +13,20 @@ module.exports = {
         path: path.resolve(__dirname, "./build"),
         filename: "[name].js",
         publicPath: "/"
+    },
+
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({
+                extractComments: false,
+                terserOptions: {
+                    compress: {
+                        drop_console: true
+                    }
+                }
+            })
+        ]
     },
 
     devServer: {
@@ -25,6 +41,9 @@ module.exports = {
             filename: "index.html",
         }),
         new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "styles.min.css"
+        }),
     ],
 
     module: {
@@ -32,7 +51,12 @@ module.exports = {
             // CSS, PostCSS, Sass
             {
                 test: /.(css|s[ac]ss)$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+                use: [
+                    isProd ? MiniCssExtractPlugin.loader : "style-loader",
+                    "css-loader",
+                    "postcss-loader",
+                    "sass-loader"
+                ],
             },
             // images
             {
@@ -57,13 +81,18 @@ module.exports = {
                     context: path.resolve(__dirname, "src/assets"),
                     name: "[path][name].[ext]"
                 },
-                type: 'asset/inline'
+                type: "asset/inline"
             },
             // JavaScript
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: ["babel-loader"],
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        babelrc: true
+                    }
+                }
             },
         ],
     }
