@@ -11,8 +11,12 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, "./build"),
-        filename: "[name].js",
+        filename: "index.js",
         publicPath: "/"
+    },
+
+    resolve: {
+        extensions: ['.js', '.scss']
     },
 
     optimization: {
@@ -31,12 +35,12 @@ module.exports = {
 
     devServer: {
         open: true,
-        port: 8080
+        port: "9000"
     },
 
     plugins: [
         new HtmlWebpackPlugin({
-            title: "webpackrequest",
+            title: "webpack request",
             template: path.resolve(__dirname, "./src/index.html"),
             filename: "index.html",
         }),

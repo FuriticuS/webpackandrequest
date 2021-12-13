@@ -1,3 +1,6 @@
-import "./assets/css/styles.scss";
+import "./assets/css/styles";
+import request from "./assets/api/request";
 
-console.log("Hello!")
+console.log("------ index.js ------")
+console.log(request());
+console.log("------ import ------")
