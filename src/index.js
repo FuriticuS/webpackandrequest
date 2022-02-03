@@ -1,6 +1,5 @@
 import "./assets/css/styles";
-import request from "./assets/api/request";
+import firstRequest from "./scripts/startSession";
 
-console.log("------ index.js ------")
-console.log(request());
-console.log("------ import ------")
+firstRequest();
+
