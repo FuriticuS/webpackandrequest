@@ -1,12 +1,17 @@
-import request from "../services/request";
+import request from "./apiServices/apiRequest";
+import renderLoadPage from "./view/renderLoadPage";
 
-const firstRequest = async() => {
+const country = 'country=ru';
+const category = 'category=technology';
+
+const loadPageRequest = async() => {
     console.log("------ index.js ------");
 
-    const orderlist = await request();
-    console.log(orderlist.data.articles);
+    const orderlist = await request(`/top-headlines?${country}&${category}`);
+    renderLoadPage(orderlist);
+
 
     console.log("------ import ------");
 }
 
-export default firstRequest;
+export default loadPageRequest;

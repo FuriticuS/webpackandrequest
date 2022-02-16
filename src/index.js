@@ -1,5 +1,8 @@
 import "./assets/css/styles";
-import firstRequest from "./scripts/startSession";
+import loadPageRequest from "./scripts/startSession";
 
-firstRequest();
+const init = function (){
+    loadPageRequest();
+};
 
+init();
